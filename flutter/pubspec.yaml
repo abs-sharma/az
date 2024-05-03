@@ -1,0 +1,27 @@
+name: my_flutter_app
+description: A new Flutter project
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  # Add any additional dependencies here
+  cupertino_icons: ^1.0.2
+
+dev_dependencies:
+  # Add any development dependencies here
+  flutter_test:
+    sdk: flutter
+
+flutter:
+  # Configure the app's metadata
+  assets:
+    - assets/image1.png
+    - assets/image2.png
+  fonts:
+    - family: OpenSans
+      fonts:
+        - asset: assets/fonts/OpenSans-Regular.ttf
+        - asset: assets/fonts/OpenSans-Bold.ttf
+          weight: 700
+
