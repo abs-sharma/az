@@ -1,0 +1,54 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Login') {
+            steps {
+                echo 'Hello '
+                git branch :'main', credentialsId: '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', url : 'https://github.com/abs-sharma/az.git'
+                
+            }
+        }
+        stage('Move Code') {
+            steps {
+                // Move code from src to build directory
+                sh 'git clean -fdx'
+                sh 'git checkout -f main' // Ensure you are on the main branch
+                sh 'git pull origin main'
+                sh 'mv android/* flutter/'
+            }
+        }
+        stage('Update Source Code') {
+            steps {
+                // Update a source code file
+                sh 'echo "New content" > README.md'
+            }
+        }
+        stage('Create Branch') {
+            steps {
+                // Create a new branch
+                sh 'git checkout -b codei'
+            }
+        }
+        stage('Add Code to Branch') {
+            steps {
+                // Add some raw code to the branch
+                sh 'echo "//new code" > flutter/Act.kt'
+                sh 'git add .'
+                // sh 'git commit -m "Adding comment"'
+            }
+        }
+        stage('Merge Branch with Main') {
+            steps {
+                git branch :'main', credentialsId: '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', url : 'https://github.com/abs-sharma/az.git'
+                // Switch back to mainline
+                sh 'git checkout main'
+                // Merge the branch
+                sh 'git merge codei'
+                // Push changes to repository
+                sh 'git checkout main'
+            }
+        }
+
+    }
+}
